@@ -1,81 +1,670 @@
-main.go:13:7: `a` is unused (deadcode)
-const a = 1
-      ^
-main.go:14:7: `b` is unused (deadcode)
-const b = 2
-      ^
-main.go:16:5: `globalData` is unused (deadcode)
-var globalData int //  GlobalVariables: Using global variables can lead to unpredictable behavior and hard-to-track bugs
-    ^
-main.go:43:18: Error return value of `file.Close` is not checked (errcheck)
-	defer file.Close() // Fix for NonClosedFile
-	                ^
-main.go:33:3: use of `fmt.Println` forbidden by pattern `^(fmt\.Print(|f|ln)|print|println)$` (forbidigo)
-		fmt.Println("Too many parameters")
-		^
-main.go:40:3: use of `fmt.Println` forbidden by pattern `^(fmt\.Print(|f|ln)|print|println)$` (forbidigo)
-		fmt.Println(err) // WrongLogging: Should use a logging package instead of fmt for errors
-		^
-main.go:46:2: use of `fmt.Println` forbidden by pattern `^(fmt\.Print(|f|ln)|print|println)$` (forbidigo)
-	fmt.Println("File content:", string(content))
-	^
-main.go:51:2: use of `fmt.Println` forbidden by pattern `^(fmt\.Print(|f|ln)|print|println)$` (forbidigo)
-	fmt.Println("Random number:", rnd.Intn(100))
-	^
-main.go:55:3: use of `fmt.Println` forbidden by pattern `^(fmt\.Print(|f|ln)|print|println)$` (forbidigo)
-		fmt.Println("Asynchronous operation")
-		^
-main.go:61:3: use of `fmt.Println` forbidden by pattern `^(fmt\.Print(|f|ln)|print|println)$` (forbidigo)
-		fmt.Println("ID is high")
-		^
-main.go:63:3: use of `fmt.Println` forbidden by pattern `^(fmt\.Print(|f|ln)|print|println)$` (forbidigo)
-		fmt.Println("ID is normal")
-		^
-main.go:81:3: use of `fmt.Println` forbidden by pattern `^(fmt\.Print(|f|ln)|print|println)$` (forbidigo)
-		fmt.Println("Name is empty")
-		^
-main.go:83:3: use of `fmt.Println` forbidden by pattern `^(fmt\.Print(|f|ln)|print|println)$` (forbidigo)
-		fmt.Println("Name is not empty")
-		^
-main.go:50:9: G404: Use of weak random number generator (math/rand instead of crypto/rand) (gosec)
-	rnd := rand.New(src)
-	       ^
-main.go:93:18: unused-parameter: parameter 'p1' seems to be unused, consider removing or renaming it as _ (revive)
-func doSomething(p1 int, p2 int, p3 string, p4 int, p5 string, p6 int, p7 string, p8 int) error {
-                 ^
-main.go:1:1: package-comments: should have a package comment (revive)
-package main
-^
-main.go:57:2: block should not end with a whitespace (or comment) (wsl)
-	}()
-	^
-main.go:98:8: data is missing in user (exhaustivestruct)
-	u := &user{id: 1, nameStr: "John Doe"}
-	      ^
-main.go:75:23: mnd: Magic number: 10, in <argument> detected (gomnd)
-	ch := make(chan int, 10)
-	                     ^
-main.go:87:27: mnd: Magic number: 2, in <argument> detected (gomnd)
-	if err := doSomething(1, 2, "", 3, "", 4, "", 5); err != nil {
-	                         ^
-main.go:32:19: mnd: Magic number: 10, in <condition> detected (gomnd)
-	if len(params) > 10 { // MagicNumbers: Avoid using magic numbers without explanation
-	                 ^
-main.go:60:12: mnd: Magic number: 100, in <condition> detected (gomnd)
-	if u.id > 100 {
-	          ^
-main.go:34:3: return with no blank line before (nlreturn)
-		return
-		^
-main.go:41:3: return with no blank line before (nlreturn)
-		return
-		^
-main.go:5:2: SA1019: "io/ioutil" has been deprecated since Go 1.19: As of Go 1.16, the same functionality is now provided by package [io] or package [os], and those implementations should be preferred in new code. See the specific function documentation for details. (staticcheck)
-	"io/ioutil" // Deprecated api: io/ioutil has been deprecated since Go 1.19
-	^
-main.go:71:15: SA4010: this result of append is never used, except maybe in other appends (staticcheck)
-		dataSlice = append(dataSlice, i)
-		            ^
-main.go:31:18: parameter name 'u' is too short for the scope of its usage (varnamelen)
-func processdata(u *user, params ...string) { // 7. LongParameterList: Functions should avoid long parameter lists
-                 ^
+{
+  "Issues": [
+    {
+      "FromLinter": "deadcode",
+      "Text": "`globalData` is unused",
+      "Severity": "",
+      "SourceLines": [
+        "var globalData int //  GlobalVariables: Using global variables can lead to unpredictable behavior and hard-to-track bugs"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 333,
+        "Line": 13,
+        "Column": 5
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "deadcode",
+      "Text": "`a` is unused",
+      "Severity": "",
+      "SourceLines": [
+        "const a = 1"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 558,
+        "Line": 17,
+        "Column": 7
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "deadcode",
+      "Text": "`b` is unused",
+      "Severity": "",
+      "SourceLines": [
+        "const b = 2"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 570,
+        "Line": 18,
+        "Column": 7
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "deadcode",
+      "Text": "`uncalledFunc` is unused",
+      "Severity": "",
+      "SourceLines": [
+        "func uncalledFunc() {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 3386,
+        "Line": 101,
+        "Column": 6
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "errcheck",
+      "Text": "Error return value of `file.Close` is not checked",
+      "Severity": "",
+      "SourceLines": [
+        "\tdefer file.Close() // Fix for NonClosedFile"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 1621,
+        "Line": 46,
+        "Column": 18
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\t\tfmt.Println(\"Too many parameters\")"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 1329,
+        "Line": 36,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\t\tfmt.Println(err) // WrongLogging: Should use a logging package instead of fmt for errors"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 1503,
+        "Line": 43,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\tfmt.Println(\"File content:\", string(content))"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 1748,
+        "Line": 49,
+        "Column": 2
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\tfmt.Println(\"Random number:\", rnd.Intn(100))"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 1945,
+        "Line": 54,
+        "Column": 2
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\t\tfmt.Println(\"Asynchronous operation\")"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 2099,
+        "Line": 58,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\t\tfmt.Println(\"ID is high\")"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 2252,
+        "Line": 64,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\t\tfmt.Println(\"ID is normal\")"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 2290,
+        "Line": 66,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\t\tfmt.Println(\"Name is empty\")"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 2984,
+        "Line": 84,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\t\tfmt.Println(\"Name is not empty\")"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 3025,
+        "Line": 86,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "forbidigo",
+      "Text": "use of `fmt.Println` forbidden by pattern `^(fmt\\.Print(|f|ln)|print|println)$`",
+      "Severity": "",
+      "SourceLines": [
+        "\tfmt.Println(\"This will never be called\")"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 3337,
+        "Line": 98,
+        "Column": 2
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gci",
+      "Text": "File is not `gci`-ed with --skip-generated -s standard -s default",
+      "Severity": "",
+      "SourceLines": [
+        "\t\"time\""
+      ],
+      "Replacement": {
+        "NeedOnlyDelete": true,
+        "NewLines": null,
+        "Inline": null
+      },
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 0,
+        "Line": 4,
+        "Column": 0
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gci",
+      "Text": "File is not `gci`-ed with --skip-generated -s standard -s default",
+      "Severity": "",
+      "SourceLines": [
+        "\t\"os\""
+      ],
+      "Replacement": {
+        "NeedOnlyDelete": false,
+        "NewLines": [
+          "\t\"os\"",
+          "\t\"time\""
+        ],
+        "Inline": null
+      },
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 0,
+        "Line": 9,
+        "Column": 0
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "godot",
+      "Text": "Comment should end in a period",
+      "Severity": "",
+      "SourceLines": [
+        "\t// extra empty line, gofmt cannot solve"
+      ],
+      "Replacement": {
+        "NeedOnlyDelete": false,
+        "NewLines": [
+          "\t// extra empty line, gofmt cannot solve."
+        ],
+        "Inline": null
+      },
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 32,
+        "Line": 5,
+        "Column": 41
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "golint",
+      "Text": "struct field `LinkedUrl` should be `LinkedURL`",
+      "Severity": "",
+      "SourceLines": [
+        "\tLinkedUrl string    //  BadNaming: URL should be URL or url."
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 852,
+        "Line": 24,
+        "Column": 2
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gosec",
+      "Text": "G404: Use of weak random number generator (math/rand instead of crypto/rand)",
+      "Severity": "",
+      "SourceLines": [
+        "\trnd := rand.New(src)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 0,
+        "Line": 53,
+        "Column": 9
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "revive",
+      "Text": "unreachable-code: unreachable code after this statement",
+      "Severity": "warning",
+      "SourceLines": [
+        "\treturn"
+      ],
+      "Replacement": null,
+      "LineRange": {
+        "From": 97,
+        "To": 97
+      },
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 3329,
+        "Line": 97,
+        "Column": 2
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "revive",
+      "Text": "package-comments: should have a package comment",
+      "Severity": "warning",
+      "SourceLines": [
+        "package main"
+      ],
+      "Replacement": null,
+      "LineRange": {
+        "From": 1,
+        "To": 1
+      },
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 0,
+        "Line": 1,
+        "Column": 1
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "revive",
+      "Text": "unused-parameter: parameter 'p1' seems to be unused, consider removing or renaming it as _",
+      "Severity": "warning",
+      "SourceLines": [
+        "func doSomething(p1 int, p2 int, p3 string, p4 int, p5 string, p6 int, p7 string, p8 int) error {"
+      ],
+      "Replacement": null,
+      "LineRange": {
+        "From": 106,
+        "To": 106
+      },
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 3464,
+        "Line": 106,
+        "Column": 18
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "tagalign",
+      "Text": "bad syntax for struct tag value",
+      "Severity": "",
+      "SourceLines": [
+        "\tid        int       `json: \"id\"` // BadSyntax: should be `json:\"id\"`(no extra space)"
+      ],
+      "Replacement": {
+        "NeedOnlyDelete": false,
+        "NewLines": null,
+        "Inline": {
+          "StartCol": 21,
+          "Length": 12,
+          "NewString": "`json: \"id\"`"
+        }
+      },
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 617,
+        "Line": 21,
+        "Column": 22
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "wsl",
+      "Text": "block should not end with a whitespace (or comment)",
+      "Severity": "",
+      "SourceLines": [
+        "\t}()"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 2172,
+        "Line": 60,
+        "Column": 2
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "wsl",
+      "Text": "expressions should not be cuddled with blocks",
+      "Severity": "",
+      "SourceLines": [
+        "\tunreachableCode()"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 3062,
+        "Line": 88,
+        "Column": 2
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "exhaustivestruct",
+      "Text": "data, LinkedUrl are missing in user",
+      "Severity": "",
+      "SourceLines": [
+        "\tu := &user{id: 1, nameStr: \"John Doe\"}"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 3581,
+        "Line": 111,
+        "Column": 8
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 10, in <argument> detected",
+      "Severity": "",
+      "SourceLines": [
+        "\tch := make(chan int, 10)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 2792,
+        "Line": 78,
+        "Column": 23
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 2, in <argument> detected",
+      "Severity": "",
+      "SourceLines": [
+        "\tif err := doSomething(1, 2, \"\", 3, \"\", 4, \"\", 5); err != nil {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 3194,
+        "Line": 91,
+        "Column": 27
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 10, in <condition> detected",
+      "Severity": "",
+      "SourceLines": [
+        "\tif len(params) > 10 { // MagicNumbers: Avoid using magic numbers without explanation"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 1259,
+        "Line": 35,
+        "Column": 19
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gomnd",
+      "Text": "mnd: Magic number: 100, in <condition> detected",
+      "Severity": "",
+      "SourceLines": [
+        "\tif u.id > 100 {"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 2244,
+        "Line": 63,
+        "Column": 12
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "gosimple",
+      "Text": "S1023: redundant `return` statement",
+      "Severity": "",
+      "SourceLines": [
+        "\treturn"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 3404,
+        "Line": 102,
+        "Column": 2
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "nlreturn",
+      "Text": "return with no blank line before",
+      "Severity": "",
+      "SourceLines": [
+        "\t\treturn"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 1366,
+        "Line": 37,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "nlreturn",
+      "Text": "return with no blank line before",
+      "Severity": "",
+      "SourceLines": [
+        "\t\treturn"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 1594,
+        "Line": 44,
+        "Column": 3
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "staticcheck",
+      "Text": "SA1019: \"io/ioutil\" has been deprecated since Go 1.19: As of Go 1.16, the same functionality is now provided by package [io] or package [os], and those implementations should be preferred in new code. See the specific function documentation for details. ",
+      "Severity": "",
+      "SourceLines": [
+        "\t\"io/ioutil\" // Deprecated api: io/ioutil has been deprecated since Go 1.19"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 168,
+        "Line": 7,
+        "Column": 2
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "staticcheck",
+      "Text": "SA4010: this result of append is never used, except maybe in other appends",
+      "Severity": "",
+      "SourceLines": [
+        "\t\tdataSlice = append(dataSlice, i)"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 2647,
+        "Line": 74,
+        "Column": 15
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    },
+    {
+      "FromLinter": "varnamelen",
+      "Text": "parameter name 'u' is too short for the scope of its usage",
+      "Severity": "",
+      "SourceLines": [
+        "func processdata(u *user, params ...string) { // 7. LongParameterList: Functions should avoid long parameter lists"
+      ],
+      "Replacement": null,
+      "Pos": {
+        "Filename": "main.go",
+        "Offset": 1143,
+        "Line": 34,
+        "Column": 18
+      },
+      "ExpectNoLint": false,
+      "ExpectedNoLintLinter": ""
+    }
+  ]
+}

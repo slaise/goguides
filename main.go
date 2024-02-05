@@ -1,25 +1,27 @@
 package main
 
 import (
+	"time"
+	// extra empty line, gofmt cannot solve
 	"fmt"       // BadImportOrdering: "fmt" should be grouped with other standard library imports
 	"io/ioutil" // Deprecated api: io/ioutil has been deprecated since Go 1.19
 	"math/rand"
 	"os"
-
-	"time"
 )
+
+// BadFormatting: Vars often declared in the behind const vars.
+var globalData int //  GlobalVariables: Using global variables can lead to unpredictable behavior and hard-to-track bugs
 
 // BadNaming: const var should be max capped.
 // BadFormatting: const vars can be groupped together.
 const a = 1
 const b = 2
 
-var globalData int //  GlobalVariables: Using global variables can lead to unpredictable behavior and hard-to-track bugs
-
 type user struct {
-	id      int
-	nameStr string    //  BadNaming: Repetitive name, can be `name`
-	data    *userData //  InappropriatePointerUse: Unnecessary use of pointers can increase complexity
+	id        int       `json: "id"` // BadSyntax: should be `json:"id"`(no extra space)
+	nameStr   string    //  BadNaming: Repetitive name, can be `name`
+	data      *userData //  InappropriatePointerUse: Unnecessary use of pointers can increase complexity
+	LinkedUrl string    //  BadNaming: URL should be URL or url.
 }
 
 type userData struct {
@@ -83,11 +85,21 @@ func processdata(u *user, params ...string) { // 7. LongParameterList: Functions
 	} else {
 		fmt.Println("Name is not empty")
 	}
+	unreachableCode()
 
 	// InconsistentErrorHandling: Mixing error handling styles leads to inconsistent code
 	if err := doSomething(1, 2, "", 3, "", 4, "", 5); err != nil {
 		panic(err) // Using panic instead of structured error handling
 	}
+}
+
+func unreachableCode() {
+	return
+	fmt.Println("This will never be called")
+}
+
+func uncalledFunc() {
+	return
 }
 
 // Long Function Parameter list.
